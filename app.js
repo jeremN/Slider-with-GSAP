@@ -35,6 +35,9 @@
             index = slideIn.index(),
             size = $('#slider .slide').length;
 
+            console.log(size);
+            console.log(index);
+
         //Prevent going to blank side
         if( slideIn.length !== 0){
 
@@ -79,10 +82,10 @@
               .set([slideInLeft, slideInRight], {x:'50%', autoAlpha: 1})
               .set(slideOut, {className: '-=active'})
               .set([slideOutLeft, slideOutRight], {x:'0', autoAlpha: 1})
-              .to(slideInLeft, 0.5, {x:'-=50%', ease: Power3.easeInOut}, 0)
-              .to(slideOutLeft, 0.5, {x:'-=100%', ease: Power3.easeInOut}, 0.5)
-              .to(slideInRight, 0.45, {x:'-=50%', ease: Power3.easeInOut}, 0.15)
-              .to(slideOutRight, 1, {x:'-=50%', ease: Power3.easeInOut}, 0.5);
+              .to(slideInRight, 0.5, {x:'-=50%', ease: Power3.easeInOut}, 0)
+              .to(slideOutRight, 0.5, {x:'-=50%', ease: Power3.easeInOut}, 0.25)
+              .to(slideInLeft, 0.45, {x:'-=50%', ease: Power3.easeInOut}, 0.15)
+              .to(slideOutLeft, 0.5, {x:'-=100%', ease: Power3.easeInOut}, 0.5);
 
         }
 
@@ -99,15 +102,37 @@
     //Go to Next preview
     function goToNextPreview(previewIn, previewOut){
 
-        var tl = new TimelineLite(); 
+        var tl = new TimelineLite(),
+            index = previewIn.index(),
+            size = $('#slide-preview .preview').length;
 
-        if( preview.length !== 0){
+            console.log(size);
+            console.log(index);
+
+
+        if( previewIn.length !== 0){
 
             tl
-              .set(previewIn, {autoAlpha: 1, className: '+=active'}),
-              .set(previewOut, {className: '-=active'}),
-              .to();
+              .set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=active'})
+              .set(previewOut, {className: '-=active'})
+              .to(previewOut, 0.5, {x: '+=100%', ease: Power3.easeInOut}, 0)
+              .to(previewIn, 0.5, {x: '+=100%', ease: Power3.easeInOut}, 0);
         }
+        else{
+            tl
+              .set(previewOut, {x: '100%', autoAlpha: 1, className: '+=active'})
+              .set(previewIn, {x: '100%', className: '-=active'})
+              .to(previewOut)
+        }
+    }
+
+    //Go to Previous preview
+    function goToPrevPreview(previewIn, previewOut){
+
+        var tl= new TimelineLite(),
+            index = previewIn.index(),
+            size = $('#slide-preview .preview').length;
+
     }
 
     /**Nav click**/
