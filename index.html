@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Jeremie Nehlil">
+
+    <!--Facebook Share window-->
+    <meta property="og:title" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="www..com">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <title>Horizontal slider with GSAP</title>
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="container">
+        
+        <!--Main-->
+        <div id="slider">
+            
+            <div id="slider-navigation">
+                
+                <!--Next img preview-->
+                <div id="slide-preview">
+                    <img id="preview-slide2" class="preview preview2 active" src="img/item1-bg.jpg">
+                    <img id="preview-slide3" class="preview preview3" src="img/item2-bg.jpg">
+                </div>
+                <!--END Next img preview-->
+
+                <!--Controls-->
+                <div id="slide-controls">
+                    <ul>
+                        <li class="slideNavPrev">
+                            <a href="#" title="Go to previous slide">
+                                <span class="ico ico-up">&#8592;</span>
+                            </a>
+                        </li>
+                        <li class="slideNavNext">
+                            <a href="#" title="Go to next slide">
+                                <span class="ico ico-down">&#8594;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--END Controls-->
+
+            </div>
+
+            <!--Items-->
+            <div id="slide-1" class="slide slide1 active">
+                <div class="split split-left">
+                    <img src="img/item3-bg.jpg">
+                </div>
+                <div class="split split-right">
+                    <img src="img/item3-bg.jpg">
+                </div>
+            </div>
+            <div id="slide-2" class="slide slide2">
+                <div class="split split-left">
+                    <img src="img/item1-bg.jpg">
+                </div>
+                <div class="split split-right">
+                    <img src="img/item1-bg.jpg">
+                </div>
+            </div>
+            <div id="slide-3" class="slide slide3">
+                <div class="split split-left">
+                    <img src="img/item2-bg.jpg">
+                </div>
+                <div class="split split-right">
+                    <img src="img/item2-bg.jpg">
+                </div>
+            </div>
+            <!--END Items-->
+
+        </div>
+        <!--END Main-->
+
+
+    </div>
+
+
+    <!--Jquery CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!--Gsap - TweenLite CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
+
+    <!--Gsap - TweenMax CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
+
+    <!--Script-->
+    <script src="app.js"></script>
+
+</body>
+
+</html>
