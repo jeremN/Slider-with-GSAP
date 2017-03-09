@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Jeremie Nehlil">
+
+    <!--Facebook Share window-->
+    <meta property="og:title" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="www..com">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <title>Horizontal slider with GSAP</title>
+
+    <!-- Custom CSS -->
+    <link href="slider.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <div class="container">
+
+        <!--Slider-->
+        <div id="Hslider" class="h-slider">
+
+            <!--Slider content to slide + preview-->
+            <div class="h-slider__wrapper">
+                
+                <div class="h-slider__image left-image" data-hslide-left="active">
+                    <figure class="h-slider-image__wrapper item isActive" data-hslide= "0">
+                        <img src="img/item3-bg.jpg" alt="Image 1">
+                    </figure>
+                </div>
+                <div class="h-slider__image right-image">
+                    <figure class="h-slider-image__wrapper item isActive" data-hslide= "0">
+                        <img src="img/item3-bg.jpg" alt="Image 1">
+                    </figure>
+                </div>
+                <div class="h-slider__preview">
+                    
+                </div>
+
+            </div>
+            <!--END Slider content to slide + preview-->
+
+            <div class="h-slider__navigation">
+                <ul>
+                    <li id="hSlidePrev" class="h-slider__previous" data-hslide-cursor="previous">
+                        <a href="#" title="Go to previous slide">
+                            <span class="ico ico-up">&#8592;</span>
+                        </a>
+                    </li>
+                    <li id="hSlideCount" class="h-slider__count">
+                        <span class="h-slider__actual">01</span>/<span class="h-slider__length">03</span>
+                    </li>
+                    <li id="hSlideNext" class="h-slider__next" data-hslide-cursor="next">
+                        <a href="#" title="Go to next slide">
+                            <span class="ico ico-down">&#8594;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <!--END Slider-->
+
+    </div>
+
+    <!--Jquery CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!--Gsap - TweenLite CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenLite.min.js"></script>
+
+    <!--Gsap - TweenMax CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
+
+    <!--Script-->
+    <script src="slider.js"></script>
+
+</body>
+
+</html>
