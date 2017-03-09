@@ -47,46 +47,7 @@
 			toLeft = '+=100%',
 			toRight = '-=100%';
 
-
-		//Set slide direction
-		if(direction === 'left' || direction === 1){
-
-			slideDirection = 1;
-		} 
-		else{
-			slideDirection = -1;
-		}
-
-		//Animate
-		slideTl
-			.set(slideIn, {autoAlpha: 1, className: '+=active'})
-			.set(slideOut, {className: "-=active"})
-			.to(slideObj.eq(currentSlide), 1, {x: toLeft});
-
-		if(slideDirection === 1){
-
-			if(currentSlide < slideObj.length -1){
-
-				currentSlide++;
-			}
-			else{
-			
-				currentSlide = 0;
-			}
-		}
-		else{
-
-			if(currentSlide > 0){
-
-				currentSlide--;
-			}
-			else{
-
-				currentSlide = slideObj.length - 1; 
-			}
-		}
 	}
-
 
 	/*Navigation*/
 	//Go to previous
@@ -94,7 +55,6 @@
 
 		e.preventDefault();
 
-		slideTo = 'left';
 		goToNext($slide, slideTo);
 
 	});
