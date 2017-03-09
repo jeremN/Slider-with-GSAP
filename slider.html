@@ -19,7 +19,9 @@
 
     <title>Horizontal slider with GSAP</title>
 
-    <!-- Custom CSS -->
+    <!--Reset CSS-->
+    <link href="reset.css" rel="stylesheet">
+    <!--Slider CSS -->
     <link href="slider.css" rel="stylesheet">
     
 </head>
@@ -28,31 +30,61 @@
     <div class="container">
 
         <!--Slider-->
-        <div id="Hslider" class="h-slider">
+        <div id="hSlider" class="h-slider">
 
             <!--Slider content to slide + preview-->
             <div class="h-slider__wrapper">
                 
+                <!--Left side wrapper-->
                 <div class="h-slider__image left-image" data-hslide-left="active">
                     <figure class="h-slider-image__wrapper item isActive" data-hslide= "0">
                         <img src="img/item3-bg.jpg" alt="Image 1">
                     </figure>
+                    <figure class="h-slider-image__wrapper item" data-hslide= "1">
+                        <img src="img/item1-bg.jpg" alt="Image 1">
+                    </figure>
+                    <figure class="h-slider-image__wrapper item" data-hslide= "2">
+                        <img src="img/item2-bg.jpg" alt="Image 1">
+                    </figure>
                 </div>
+                <!--END Left side wrapper-->
+                
+                <!--Right side wrapper-->
                 <div class="h-slider__image right-image">
+                    <div class="left-shadow"></div>
                     <figure class="h-slider-image__wrapper item isActive" data-hslide= "0">
                         <img src="img/item3-bg.jpg" alt="Image 1">
                     </figure>
+                    <figure class="h-slider-image__wrapper item" data-hslide= "1">
+                        <img src="img/item1-bg.jpg" alt="Image 1">
+                    </figure>
+                    <figure class="h-slider-image__wrapper item" data-hslide= "2">
+                        <img src="img/item2-bg.jpg" alt="Image 1">
+                    </figure>
                 </div>
+                <!--END Right side wrapper-->
+
+                <!--Preview wrapper-->
                 <div class="h-slider__preview">
-                    
+                    <figure class="h-slider__thumb preview" data-hslide-preview="0">
+                        <img src="img/item3-bg.jpg" alt="Preview slide 2">
+                    </figure>
+                    <figure class="h-slider__thumb preview isActive" data-hslide-preview="1">
+                        <img src="img/item1-bg.jpg" alt="Preview slide 2">
+                    </figure>
+                    <figure class="h-slider__thumb preview" data-hslide-preview="2">
+                        <img src="img/item2-bg.jpg" alt="Preview slide 2">
+                    </figure>
                 </div>
+                <!--END Preview wrapper-->
 
             </div>
             <!--END Slider content to slide + preview-->
 
+            <!--Slider navigation-->
             <div class="h-slider__navigation">
                 <ul>
-                    <li id="hSlidePrev" class="h-slider__previous" data-hslide-cursor="previous">
+                    <li id="hSlidePrev" class="h-slider__nav previous" data-hslide-cursor="previous">
                         <a href="#" title="Go to previous slide">
                             <span class="ico ico-up">&#8592;</span>
                         </a>
@@ -60,13 +92,14 @@
                     <li id="hSlideCount" class="h-slider__count">
                         <span class="h-slider__actual">01</span>/<span class="h-slider__length">03</span>
                     </li>
-                    <li id="hSlideNext" class="h-slider__next" data-hslide-cursor="next">
+                    <li id="hSlideNext" class="h-slider__nav next" data-hslide-cursor="next">
                         <a href="#" title="Go to next slide">
                             <span class="ico ico-down">&#8594;</span>
                         </a>
                     </li>
                 </ul>
             </div>
+            <!--END Slider navigation-->
             
         </div>
         <!--END Slider-->
