@@ -14,8 +14,8 @@
     //Init function
     function init(){
 
-        TweenLite.set($hSlide.not($active), { autoAlpha: 0});
-        TweenLite.set($hPreview.not($active), { autoAlpha: 0});
+        TweenLite.set($hSlide.not($active), {autoAlpha: 0});
+        TweenLite.set($hPreview.not($active), {autoAlpha: 0});
 
         TweenLite.set($slideNavPrev, {autoAlpha: 0.2});
     }
@@ -42,7 +42,9 @@
             thumbSize = $('#slide-preview .preview').length;
 
         console.log("N slide index is " + index);
-        console.log("N slide size is " + size);
+        //console.log("N slide size is " + size);
+        console.log("N thumb index is " + thumbIndex);
+        console.log("N thumb length is " + previewIn.length);
 
         //Prevent going to blank side
         if( slideIn.length !== 0 ){
@@ -58,22 +60,19 @@
               .to(slideOutRight, 1, {x:'+=100%', ease: $easing}, 0.5);
 
 
+            thumbTl
+              .set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=active'})
+              .set(previewOut, {className: '-=active'})
+              .to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
+              .to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
 
             if( index === size ){
 
                 thumbTl
-                  .set(previewIn, {x: '0', className: '-=active'})
-                  .set(lastPreview, {x: '100%', autoAlpha: 1, className: '+=active'})
-                  .to(lastPreview, 0.15, {x: '-=100%', ease: $easing})
-                  .to(previewIn, 0.15, {x: '-=100%', ease: $easing});
-            }
-            else{
-                
-                thumbTl
-                  .set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=active'})
-                  .set(previewOut, {className: '-=active'})
-                  .to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
-                  .to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
+                  .set(previewIn, {className: '-=active'})
+                  .set(lastPreview, {autoAlpha: 1, className: '+=active'})
+                  .to(lastPreview, 0.15, {x: '-=100%', ease: $easing}, 0)
+                  .to(previewIn, 0.15, {x: '-=100%', ease: $easing}, 0);
             }
         }
 
@@ -95,19 +94,19 @@
             slideOutRight = slideOut.find('>.split-right img'),
             slideInLeft = slideIn.find('>.split-left img'),
             slideInRight = slideIn.find('>.split-right img'),
-            lastPreview = previewOut.next('.preview'),
             index = slideIn.index(),
             size = $('#slider .slide').length,
             thumbIndex = previewIn.index(),
             thumbSize = $('#slide-preview .preview').length;
 
         console.log("P slide index is " + index);
-        console.log("P slide size is " + size);
+        //console.log("P slide size is " + size);
+        console.log("P thumb index is " + thumbIndex);
+        console.log("P thumb length is " + previewIn.length);
 
         /*Go to next slide*/
         //Prevent going to blank side
         if( slideIn.length !== 0 ){
-
 
             slideTl
               .set(slideIn, {autoAlpha: 1, className: '+=active'})
@@ -119,22 +118,22 @@
               .to(slideInLeft, 0.45, {x:'-=50%', ease: $easing}, 0.15)
               .to(slideOutLeft, 0.5, {x:'-=100%', ease: $easing}, 0.5);
 
+            thumbTl
+              .set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=active'})
+              .set(previewOut, {className: '-=active'})
+              .to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
+              .to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0)
+              .set(previewOut, {x: '100%'});
 
             if( index === 1){
 
+                var lastPreview = previewOut.next('.preview');
+
                 thumbTl
-                  .set(previewIn, {x: '0', className: '-=active'})
-                  .set(lastPreview, {x: '0', autoAlpha: 1, className: '+=active'})
-                  .to(lastPreview, 0.15, {x: '-=100%', ease: $easing})
-                  .to(previewIn, 0.15, {x: '-=100%', ease: $easing});
-            }
-            else{
-                
-                thumbTl
-                  .set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=active'})
-                  .set(previewOut, {className: '-=active'})
-                  .to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
-                  .to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
+                  .set(previewIn, {className: '-=active'})
+                  .set(lastPreview, {x :'0', autoAlpha: 1, className: '+=active'})
+                  .to(lastPreview, 0.15, {x: '-=100%', ease: $easing}, 0)
+                  .to(previewIn, 0.15, {x: '-=100%', ease: $easing}, 0)
             }
         }
 
