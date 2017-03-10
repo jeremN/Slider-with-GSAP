@@ -61,123 +61,110 @@
 		});
 	}
 
+	function toSlide(direction){
 
-	/*Slide Functions*/
-	function goToNext(){
+		var slideTl = new TimelineLite(),
+			slideInLeft,
+			slideInRight,
+			slideOutLeft = $leftSlide.find('.item.isActive'),
+			slideOutRight = $rightSlide.find('.item.isActive'),
+			slideIndex,
+			size = $('#hSlider .left-image .item').length;
 
-		var slideTl 		= new TimelineLite(),
-			previewTl 		= new TimelineLite(),
-			slideInLeft 	= $leftSlide.find('.item.isActive').next('.item'),
-			slideInRight 	= $rightSlide.find('.item.isActive').next('.item'),
-			slideOutLeft 	= $leftSlide.find('.item.isActive'),
-			slideOutRight 	=  $rightSlide.find('.item.isActive'),
-			slideIndex 		= slideInLeft.index(),
-			size 			= $('#hSlider .left-image .item').length;
-			//direction = '+=100%';
+		var previewTl = new TimelineLite(),
+			previewOut = $('.preview.isActive'),
+			previewIn;
 
-			console.log(slideIndex);
+		//Go to next slide / preview
+		if( direction === "left" ){
 
-		var previewOut 		=  $('.preview.isActive'),
-			previewIn 		= $('.preview.isActive').next('.preview');
+			slideInLeft = $leftSlide.find('.item.isActive').next('.item'),
+			slideInRight = $rightSlide.find('.item.isActive').next('.item'),
+			slideIndex = slideInLeft.index(),
+			previewIn = $('.preview.isActive').next('.preview');
 
-		if( slideInLeft.length !== 0 ){
+			//Slide
+			if( slideInLeft.length !== 0 ){
 
-			slideTl
-				.set([slideInLeft, slideInRight], {x: '-100%',autoAlpha: 1, className: '+=isActive'})
-				.set([slideOutLeft, slideOutRight], {x: '0', autoAlpha: 1, className: '-=isActive'})
-				.to(slideInLeft, 0.5, {x: '+=100%', ease: $easing}, 0.15)
-				.to(slideOutLeft, 0.5, {x: '+=100%', ease: $easing}, 0.5)
-				.to(slideInRight, 0.5, {x: '+=100%', ease: $easing}, 0.35)
-				.to(slideOutRight, 1, {x: '+=100%', ease: $easing}, 0.5);
+				slideTl
+					.set([slideInLeft, slideInRight], {x: '-100%',autoAlpha: 1, className: '+=isActive'})
+					.set([slideOutLeft, slideOutRight], {x: '0', autoAlpha: 1, className: '-=isActive'})
+					.to(slideInLeft, 0.5, {x: '+=100%', ease: $easing}, 0.15)
+					.to(slideOutLeft, 0.5, {x: '+=100%', ease: $easing}, 0.5)
+					.to(slideInRight, 0.5, {x: '+=100%', ease: $easing}, 0.35)
+					.to(slideOutRight, 1, {x: '+=100%', ease: $easing}, 0.5);
+			}
+
+			//Preview
+			if( previewIn.length !== 0 ){
+
+				previewTl
+					.set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=isActive'})
+					.set(previewOut, {x: '0', autoAlpha: 1, className: '-=isActive'})
+					.to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
+					.to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
+			}
+		}
+		//Go to previous slide / preview
+		else if( direction === "right" ){
+
+			slideInLeft = $leftSlide.find('.item.isActive').prev('.item'),
+			slideInRight = $rightSlide.find('.item.isActive').prev('.item'),
+			slideIndex = slideInLeft.index(),
+			previewIn = $('.preview.isActive').prev('.preview');
+
+			//Slide
+			if( slideInLeft.length !== 0 ){
+
+				slideTl
+					.set([slideInLeft, slideInRight], {x: '100%',autoAlpha: 1, className: '+=isActive'})
+					.set([slideOutLeft, slideOutRight], {x: '0', autoAlpha: 1, className: '-=isActive'})
+					.to(slideInRight, 0.5, {x: '-=100%', ease: $easing}, 0)
+					.to(slideOutRight, 0.5, {x: '-=100%', ease: $easing}, 0.25)
+					.to(slideInLeft, 0.45, {x: '-=100%', ease: $easing}, 0.15)
+					.to(slideOutLeft, 0.5, {x: '-=100%', ease: $easing}, 0.5);
+			}
+
+			//Preview
+			if( previewIn.length !== 0 ){
+
+				previewTl
+					.set(previewIn, {x:'100%', autoAlpha: 1, className: '+=isActive'})
+					.set(previewOut, {x: '0', autoAlpha: 1, className: '-=isActive'})
+					.to(previewOut, 0.15, {x: '-=100%', ease: $easing}, 0)
+					.to(previewIn, 0.15, {x: '-=100%', ease: $easing}, 0);
+			}
 		}
 
-		if( previewIn.length !== 0 ){
+		fadeSlideNav(slideIndex);
+	}
 
-			previewTl
-				.set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=isActive'})
-				.set(previewOut, {x: '0', autoAlpha: 1, className: '-=isActive'})
-				.to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
-				.to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
-		}
-
-		//FadeIn arrow Prev
-		TweenLite.set($slideNavPrev, {autoAlpha: 1});
-
+	function fadeSlideNav(index){
+			
 		//FadeOut arrow Next on last slide
-		if( slideIndex === size - 1 ){
+		if( index === $size - 1 ){
 
 			TweenLite.to($slideNavNext, 0.3, {autoAlpha: 0.2, ease: Linear.easeNone});
 		}
-	}
+		else{
 
-	function goToPrev(){
-
-		var slideTl 		= new TimelineLite(),
-			previewTl 		= new TimelineLite(),
-			slideInLeft		= $leftSlide.find('.item.isActive').prev('.item'),
-			slideInRight 	= $rightSlide.find('.item.isActive').prev('.item'),
-			slideOutLeft 	= $leftSlide.find('.item.isActive'),
-			slideOutRight 	=  $rightSlide.find('.item.isActive'),
-			slideIndex 		= slideInLeft.index();
-
-		var previewOut 		=  $('.preview.isActive'),
-			previewIn 		= $('.preview.isActive').prev('.preview');
-
-			console.log(slideIndex);
-
-		if( slideInLeft.length !== 0 ){
-
-			slideTl
-				.set([slideInLeft, slideInRight], {x: '100%',autoAlpha: 1, className: '+=isActive'})
-				.set([slideOutLeft, slideOutRight], {x: '0', autoAlpha: 1, className: '-=isActive'})
-				.to(slideInRight, 0.5, {x: '-=100%', ease: $easing}, 0)
-				.to(slideOutRight, 0.5, {x: '-=100%', ease: $easing}, 0.25)
-				.to(slideInLeft, 0.45, {x: '-=100%', ease: $easing}, 0.15)
-				.to(slideOutLeft, 0.5, {x: '-=100%', ease: $easing}, 0.5);
+			//FadeIn arrow Next
+			TweenLite.set($slideNavNext, {autoAlpha: 1});
 		}
-
-		if( previewIn.length !== 0 ){
-
-			previewTl
-				.set(previewIn, {x:'100%', autoAlpha: 1, className: '+=isActive'})
-				.set(previewOut, {x: '0', autoAlpha: 1, className: '-=isActive'})
-				.to(previewOut, 0.15, {x: '-=100%', ease: $easing}, 0)
-				.to(previewIn, 0.15, {x: '-=100%', ease: $easing}, 0);
-		}
-		else if( slideInleft.length === size - 1 ){
-
-		}
-
-		//FadeIn arrow Next
-		TweenLite.set($slideNavNext, {autoAlpha: 1});
 
 		//FadeOut arrow Prev on last slide
-		if( slideIndex === 0 ){
+		if( index === 0 ){
 
 			TweenLite.to($slideNavPrev, 0.3, {autoAlpha: 0.2, ease: Linear.easeNone});
 		}
+		else{
+
+			//FadeIn arrow Prev
+			TweenLite.set($slideNavPrev, {autoAlpha: 1});
+		}
 	}
 
-	/*Navigation*/
-	//Go to previous
-	/*$slideNavPrev.click(function(e){
-
-		e.preventDefault();
-
-		goToPrev();
-		$currentSlide--;
-
-	});
-
-	//Go to next
-	$slideNavNext.click(function(e){
-
-		e.preventDefault();
-
-		goToNext();
-		$currentSlide++;
-	});*/
-
+	/*NAVIGATION*/
 	//Next || Previous nav
 	$('.h-slider__nav').click(function(e){
 
@@ -185,24 +172,26 @@
 
 		$slideNav = $(this).attr('data-hslide-cursor');
 	
-		if( $slideNav === "previous" ){
+		if( $slideNav === "previous" || $(this).hasClass('previous') ){
 			
 			direction = "right";
-			goToPrev();
+			//goToPrev();
 			$currentSlide--;
 		}
-		else if( $slideNav === "next" ){
+		else if( $slideNav === "next" || $(this).hasClass('next') ){
 
 			direction = "left";
-			goToNext();
+			//goToNext();
 			$currentSlide++;
 		}
 		else{
 
 			direction = "left";
-			goToNext();
+			//goToNext();
 			$currentSlide++;
 		}
+
+		toSlide(direction);
 	});
 
 
