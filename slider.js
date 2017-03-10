@@ -24,8 +24,8 @@
 	function init(){
 
 		//Set inactive slide and thumb to opacity 0 and translateX -100%
-		TweenLite.set($slide.not($active), {autoAlpha: 0});
-		TweenLite.set($preview.not($active), {autoAlpha: 0});
+		TweenLite.set($slide.not($active), {x: '-100%',autoAlpha: 0});
+		TweenLite.set($preview.not($active), {x: '-100%',autoAlpha: 0});
 
 		//Set the previous button inactive
 		TweenLite.set($slideNavPrev, {autoAlpha: 0.2});
@@ -61,6 +61,7 @@
 		});
 	}
 
+	//Slide next/previous 
 	function toSlide(direction){
 
 		var slideTl = new TimelineLite(),
@@ -101,8 +102,15 @@
 				previewTl
 					.set(previewIn, {x:'-100%', autoAlpha: 1, className: '+=isActive'})
 					.set(previewOut, {x: '0', autoAlpha: 1, className: '-=isActive'})
-					.to(previewOut, 0.15, {x: '+=100%', ease: $easing}, 0)
-					.to(previewIn, 0.15, {x: '+=100%', ease: $easing}, 0);
+					.to(previewIn, 0.25, {x: '+=100%', ease: $easing}, 0.1)
+					.to(previewOut, 0.25, {x: '+=100%', ease: $easing}, 0.5);
+
+				if( $currentSlide === $size - 1 ){
+
+					/*previewTl
+						.set(previewIn, {className: '-=active'})
+						.set*/
+				}
 			}
 		}
 		//Go to previous slide / preview
@@ -139,6 +147,7 @@
 		fadeSlideNav(slideIndex);
 	}
 
+	//Navigation button fade In/Out
 	function fadeSlideNav(index){
 			
 		//FadeOut arrow Next on last slide
@@ -164,8 +173,7 @@
 		}
 	}
 
-	/*NAVIGATION*/
-	//Next || Previous nav
+	//Next/Previous navigation
 	$('.h-slider__nav').click(function(e){
 
 		e.preventDefault();
@@ -192,6 +200,8 @@
 		}
 
 		toSlide(direction);
+		console.log($currentSlide);
+
 	});
 
 
