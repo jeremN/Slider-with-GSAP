@@ -32,7 +32,7 @@
 		//Get url of <img> and place it as background img
 		$('.preview, .item').each(function(){
 
-			var imgSrc = $(this).children('img').attr('src');
+			var imgSrc = $(this).attr('data-hslide-img');
 			$(this).css('background-image', 'url('+ imgSrc +')');
 		});
 	}
@@ -41,7 +41,7 @@
 
 
 	/*Slide Functions*/
-	function goToNext(direction){
+	function goToNext(){
 
 		var slideTl = new TimelineLite(),
 			slideInLeft = $leftSlide.find('.item.isActive').next('.item'),
@@ -49,6 +49,7 @@
 			slideOutLeft = $leftSlide.find('.item.isActive'),
 			slideOutRight =  $rightSlide.find('.item.isActive'),
 			slideIndex = slideInLeft.index();
+			//direction = '+=100%';
 
 		if( slideInLeft.length !== 0 ){
 
@@ -71,15 +72,44 @@
 		}
 	}
 
+	function goToPrev(){
+
+		var slideTl = new TimelineLite(),
+			slideInLeft = $leftSlide.find('.item.isActive').prev('.item'),
+			slideInRight = $rightSlide.find('.item.isActive').prev('.item'),
+			slideOutLeft = $leftSlide.find('.item.isActive'),
+			slideOutRight =  $rightSlide.find('.item.isActive'),
+			slideIndex = slideInLeft.index();
+
+		if( slideInLeft.length !== 0 ){
+
+			slideTl
+				.set([slideInLeft, slideInRight], {x: '100%',autoAlpha: 1, className: '+=isActive'})
+				.set([slideOutLeft, slideOutRight], {x: '0', autoAlpha: 1, className: '-=isActive'})
+				.to(slideInRight, 0.5, {x: '-=100%', ease: $easing}, 0)
+				.to(slideOutRight, 0.5, {x: '-=100%', ease: $easing}, 0.25)
+				.to(slideInLeft, 0.45, {x: '-=100%', ease: $easing}, 0.15)
+				.to(slideOutLeft, 0.5, {x: '-=100%', ease: $easing}, 0.5);
+		}
+
+		//FadeIn arrow Prev
+		TweenLite.set($slideNavNext, {autoAlpha: 1});
+
+		//FadeOut arrow Next on last slide
+		if( slideIndex === $size ){
+
+			TweenLite.to($slideNavPrev, 0.3, {autoAlpha: 0.2, ease: Linear.easeNone});
+		}
+
+	}
+
 	/*Navigation*/
 	//Go to previous
 	$slideNavPrev.click(function(e){
 
 		e.preventDefault();
 
-		var slideLeft = $leftSlide.find('> .item.isActive');
-
-		goToNext($toLeft);
+		goToPrev();
 
 	});
 
@@ -92,9 +122,22 @@
 	});
 
 	//Next || Previous nav
-	/*if(){
+	/*
+	$('.h-slider__nav').click(function(e){
 
-	}*/
+		$direction = $(this).attr('data-hslide-cursor');
+	
+		if( $direction = "previous" ){
+			
+			direction = "right";
+		}
+		else{
+			direction = "left";
+		}
+
+		//var direction = $direction = "previous" ? "right" : "left";
+	});
+	*/
 
 
 })($);
