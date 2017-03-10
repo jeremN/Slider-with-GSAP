@@ -18,6 +18,7 @@
 
 
 		console.log($size);
+		console.log($currentSlide);
 
 	//Init
 	function init(){
@@ -29,15 +30,36 @@
 		//Set the previous button inactive
 		TweenLite.set($slideNavPrev, {autoAlpha: 0.2});
 
-		//Get url of <img> and place it as background img
-		$('.preview, .item').each(function(){
-
-			var imgSrc = $(this).attr('data-hslide-img');
-			$(this).css('background-image', 'url('+ imgSrc +')');
-		});
+		//Get img url and set in as a background-image of element
+		getImage();
 	}
 
 	init();
+
+	//Get image path
+	function getImage(){
+
+		$('#hSlider .preview, #hSlider .item').each(function(){
+
+			var imgSrc = $(this).children('img').attr('src'),
+				attrSrc = $(this).attr('data-hslide-img'),
+				pathSrc;
+
+			//Else if attr is set
+			if( typeof attrSrc !== typeof undefined && attrSrc !== false ){
+
+				pathSrc = attrSrc;
+			}
+			//Check if image is set
+			else if( imgSrc !== false && imgSrc !== undefined ){
+
+				pathSrc = imgSrc;
+			}
+
+			//Set path in element as background-image
+			$(this).css('background-image', 'url('+ pathSrc +')');
+		});
+	}
 
 
 	/*Slide Functions*/
@@ -138,7 +160,7 @@
 
 	/*Navigation*/
 	//Go to previous
-	$slideNavPrev.click(function(e){
+	/*$slideNavPrev.click(function(e){
 
 		e.preventDefault();
 
@@ -154,25 +176,34 @@
 
 		goToNext();
 		$currentSlide++;
-	});
+	});*/
 
 	//Next || Previous nav
-	/*
 	$('.h-slider__nav').click(function(e){
 
-		$direction = $(this).attr('data-hslide-cursor');
+		e.preventDefault();
+
+		$slideNav = $(this).attr('data-hslide-cursor');
 	
-		if( $direction = "previous" ){
+		if( $slideNav === "previous" ){
 			
 			direction = "right";
+			goToPrev();
+			$currentSlide--;
+		}
+		else if( $slideNav === "next" ){
+
+			direction = "left";
+			goToNext();
+			$currentSlide++;
 		}
 		else{
-			direction = "left";
-		}
 
-		//var direction = $direction = "previous" ? "right" : "left";
+			direction = "left";
+			goToNext();
+			$currentSlide++;
+		}
 	});
-	*/
 
 
 })($);
