@@ -197,7 +197,7 @@
 			//FadeIn arrow Prev
 			TweenLite.set($slideNavPrev, {autoAlpha: 1});
 		}
-
+/*
 		if( $currentSlide <= 0 ){
 
 			$slideNavPrev.off('click');
@@ -211,8 +211,8 @@
 			$slideNavPrev.on('click');
 			$slideNavNext.on('click');
 		}
+*/
 	}
-
 	//Navigation count
 	function countSlide(){
 
@@ -275,10 +275,12 @@
 
 			});
 		}
+		/*
 		else{
 
-			$('.h-slider__nav').click(false);
+			$('.h-slider__nav').off('click');
 		}
+		*/
 	}
 
 	sliderNav();
