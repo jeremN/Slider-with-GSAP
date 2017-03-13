@@ -8,7 +8,7 @@ html, body {
 
 body {
 	background-color: #ededed;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	font-family: 'Open sans', Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	line-height: 1.4;
@@ -211,7 +211,7 @@ Slider style
 /**
 Background img
 **/
-.item[data-hslide="0"],
+/*.item[data-hslide="0"],
 .preview[data-hslide-preview="0"]{
 	background-image: url("img/item3-bg.jpg");
 }      
@@ -222,4 +222,4 @@ Background img
 .item[data-hslide="2"],
 .preview[data-hslide-preview="2"]{
 	background-image: url("img/item2-bg.jpg");
-}
+}*/
